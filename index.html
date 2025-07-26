@@ -5,14 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fahmi | Portofolio</title>
 
-  <!-- ===== 3rd‑Party CSS ===== -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* ---------- THEME VARIABLES ---------- */
     :root {
       --bg-main: #0d0125;
       --bg-sec: #25004d;
@@ -30,7 +28,6 @@
       --shadow-card: rgba(0,0,0,0.1);
     }
 
-    /* ---------- BASE ---------- */
     html { scroll-behavior: smooth; }
     body {
       background: var(--bg-main);
@@ -41,7 +38,6 @@
     }
     a { text-decoration: none; }
 
-    /* ---------- NAVBAR ---------- */
     .navbar {
       backdrop-filter: blur(6px);
       background: rgba(0,0,0,0.2) !important;
@@ -52,17 +48,13 @@
     }
     .nav-link:hover::after, .nav-link.active::after { width:100%; }
 
-    /* Theme Toggle */
     #theme-toggle { border:2px solid var(--accent-1); background:transparent; color:var(--accent-1); border-radius:50px; padding:6px 12px; margin-left:1rem; }
 
-    /* ---------- BACKGROUND BLOBS ---------- */
     .bg-anim { position:fixed; inset:0; z-index:-2; pointer-events:none; }
     .blob { position:absolute; width:60vmax; aspect-ratio:1/1; background:radial-gradient(circle at 30% 30%, var(--accent-1), transparent 60%); filter:blur(120px); opacity:.6; animation:blob 25s ease-in-out infinite alternate; }
     .blob:nth-child(2){ background:radial-gradient(circle at 70% 70%, var(--accent-2), transparent 60%); animation-delay:-12s; }
     @keyframes blob{ from{transform:translate(-30%,-20%) rotate(0deg);} to{transform:translate(25%,25%) rotate(360deg);} }
 
-
-    /* ---------- HERO ---------- */
     .hero{ min-height:100vh; display:flex; align-items:center; }
     .hero .container{ display:flex; flex-wrap:wrap; gap:50px; align-items:center; justify-content:center; }
     .profile-img{ width:260px; height:260px; border-radius:50%; object-fit:cover; border:6px solid var(--accent-1); box-shadow:0 0 35px var(--accent-1); }
@@ -71,38 +63,30 @@
     .btn-accent{ background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); border:none; color:#fff; font-weight:600; padding:10px 26px; border-radius:10px; box-shadow:0 0 15px var(--accent-2); transition:transform .3s, box-shadow .3s; }
     .btn-accent:hover{ transform:translateY(-3px) scale(1.04); box-shadow:0 0 25px var(--accent-1); }
 
-    /* ---------- SECTIONS ---------- */
     section{ padding:110px 20px; position:relative; }
     .section-title{ font-family:'Orbitron',sans-serif; font-size:2.3rem; text-align:center; color:var(--accent-1); margin-bottom:60px; text-shadow:0 0 8px var(--accent-1); }
 
-    /* About */
     .about-box{ background:linear-gradient(135deg,var(--bg-sec) 10%,rgba(255,255,255,.06)); padding:50px; border-radius:22px; box-shadow:0 8px 30px var(--shadow-card); position:relative; overflow:hidden; }
     .about-box::before{ content:""; position:absolute; inset:0; padding:2px; border-radius:22px; background:linear-gradient(135deg,var(--accent-1),transparent); mask:linear-gradient(#0000 0 0); }
 
-    /* Tilt Cards */
     .card-tilt{ background:linear-gradient(145deg,var(--bg-sec),var(--bg-main)); border:none; border-radius:18px; padding:35px 25px; color:var(--text-main); box-shadow:0 6px 24px var(--shadow-card); transition:transform .4s; }
     .card-tilt:hover{ transform:rotateX(8deg) rotateY(14deg) translateY(-8px); }
     .icon-xl{ font-size:3rem; }
 
-    /* Portfolio */
     .project-card{ background:linear-gradient(120deg,var(--bg-sec),rgba(255,255,255,.03)); border-radius:18px; box-shadow:0 6px 24px var(--shadow-card); padding:30px; transition:transform .35s; }
     .project-card:hover{ transform:translateY(-12px) scale(1.03); }
 
-    /* Contact */
     .contact-card{ background:var(--bg-sec); padding:45px; border-radius:22px; box-shadow:0 6px 24px var(--shadow-card); }
     .form-control,.form-control:focus{ background:rgba(255,255,255,.08); border:none; color:var(--text-main); }
     .form-control::placeholder{ color:rgba(255,255,255,.6); }
 
-    /* Tab Pills */
     .nav-pills .nav-link{ border-radius:0; color:var(--text-main); padding-inline:30px; }
     .nav-pills .nav-link.active{ background:var(--accent-1); color:#fff; box-shadow:0 0 12px var(--accent-2); }
   </style>
 </head>
 <body>
-  <!-- Background Blobs -->
   <div class="bg-anim"><span class="blob"></span><span class="blob"></span></div>
 
-  <!-- ===== Navbar ===== -->
   <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container">
       <a class="navbar-brand fw-bold" href="#home">Fahmi</a>
@@ -111,21 +95,20 @@
       </button>
       <div class="collapse navbar-collapse" id="navBar">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-          <li class="nav-item"><a class="nav-link" href="#projects">Project</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link active" href="#home">Beranda</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">Tentang</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Kemampuan</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Proyek</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Kontak</a></li>
         </ul>
         <button id="theme-toggle">🌓</button>
       </div>
     </div>
   </nav>
 
-  <!-- ===== Hero ===== -->
   <header class="hero" id="home">
     <div class="container" data-aos="fade-up">
-      <img src="assets/img/aku.png" alt="Foto Fahmi" class="profile-img" style=" width: 140px; ">   
+      <img src="asset/img/aku.png" alt="Foto Fahmi" class="profile-img" style=" width: 140px; ">   
       <div class="text-center text-lg-start">
         <h1 class="name mb-2">Fahmi Febriansyah</h1>
         <h4><span id="typed"></span></h4>
@@ -134,78 +117,89 @@
     </div>
   </header>
 
-  <!-- ===== Marquee ===== -->
   <div class="py-3 text-center" style="background:var(--bg-sec); font-family:'Orbitron',sans-serif; white-space:nowrap; overflow:hidden;">
     <div class="d-inline-block" style="animation:marquee 20s linear infinite; font-size:1.8rem;">
-      ✳ LET&nbsp;ME&nbsp;INTRODUCE&nbsp;MYSELF ✳ LET&nbsp;ME&nbsp;INTRODUCE&nbsp;MYSELF ✳
+      ✳ Mari&nbsp;Berrkenanalan&nbsp;Dengan&nbsp;saya ✳ Mari&nbsp;Berkenalan&nbsp;Dengan&nbsp;Saya ✳
     </div>
   </div>
   <style>@keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}</style>
 
-  <!-- ===== About ===== -->
   <section id="about" data-aos="fade-up">
     <div class="container">
       <h2 class="section-title">Tentang Saya</h2>
       <div class="about-box mx-auto col-lg-9">
-        <p>Saya <strong>Fahmi</strong>, pengembang web fokus pada estetika futuristik dan performa optimal. 4+ tahun membangun aplikasi e‑commerce, dashboard, dan landing interaktif.</p>
-        <ul class="list-inline mt-4">
-          <li class="list-inline-item me-4"><i class="fab fa-github fa-lg"></i></li>
-          <li class="list-inline-item me-4"><i class="fab fa-linkedin fa-lg"></i></li>
-          <li class="list-inline-item"><i class="fab fa-instagram fa-lg"></i></li>
-        </ul>
+       <p>Saya adalah seorang mahasiswa Teknik Informatika di Universitas Indraprasta PGRI yang memiliki minat dan pengalaman kuat dalam pengembangan aplikasi web. Saya terbiasa membangun sistem informasi berbasis PHP native dan MySQL, mulai dari aplikasi absensi dan penggajian berbasis QR code, sistem perpustakaan, hingga aplikasi kasir dan manajemen gudang. Dalam pengembangan proyek, saya menguasai konsep dasar hingga lanjutan seperti login multi-peran, manajemen session, validasi form, dan pengelolaan data menggunakan query SQL yang kompleks.</p>
+<p>saya juga menguasai konsep dan implementasi Object-Oriented Programming (OOP), baik dalam pembuatan class, pemisahan logika, maupun struktur proyek agar lebih rapi dan modular. Selain pengembangan back-end, saya mampu membuat antarmuka pengguna yang sederhana dan fungsional dengan HTML, CSS, JavaScript, serta memanfaatkan framework seperti Bootstrap dan library seperti SweetAlert untuk meningkatkan pengalaman pengguna. Saya memiliki semangat belajar tinggi, mampu bekerja mandiri maupun dalam tim, dan selalu tertarik mengeksplorasi teknologi baru yang dapat mendukung efisiensi pengembangan aplikasi.</p>
+       <ul class="list-inline mt-4 position-relative" style="z-index:10;">
+  <li class="list-inline-item me-4">
+    <a href="https://github.com/Fahmi-febriansyah" target="_blank" style="color:inherit; position:relative; z-index:10;">
+      <i class="fab fa-github fa-lg"></i>
+    </a>
+  </li>
+  <li class="list-inline-item me-4">
+    <a href="https://linkedin.com/in/fahmifebriansyah" target="_blank" style="color:inherit; position:relative; z-index:10;">
+      <i class="fab fa-linkedin fa-lg"></i>
+    </a>
+  </li>
+  <li class="list-inline-item">
+    <a href="https://instagram.com/fahmifsyh33" target="_blank" style="color:inherit; position:relative; z-index:10;">
+      <i class="fab fa-instagram fa-lg"></i>
+    </a>
+  </li>
+</ul>
+
       </div>
     </div>
   </section>
 
-  <!-- ===== Skills / Tabs ===== -->
   <section id="skills" data-aos="fade-up">
     <div class="container">
-      <h2 class="section-title">Journey</h2>
+      <h2 class="section-title">perjalanan</h2>
       <ul class="nav nav-pills justify-content-center mb-5" id="journeyTab" role="tablist">
-        <li class="nav-item" role="presentation"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#edu">Education</button></li>
-        <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#exp">Experience</button></li>
-        <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#skill">Skills</button></li>
-        <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#cert">Certificate</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#edu">Pendidikan</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#exp">Pengalaman</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#skill">Kemampuan</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#cert">Sertifikat</button></li>
       </ul>
       <div class="tab-content" id="journeyTabContent">
         <div class="tab-pane fade show active" id="edu">
-          <div class="card-tilt text-center mx-auto" style="max-width:500px;">Universitas Indraprasta – S.Kom (2020‑2024)</div>
+          <div class="card-tilt text-center mx-auto" style="max-width:500px;">Universitas Indraprasta – S.Kom (2022‑sekarang)</div>
         </div>
         <div class="tab-pane fade" id="exp">
-          <div class="card-tilt text-center mx-auto" style="max-width:500px;">Frontend Developer – Left Wing Studio (2023‑Sekarang)</div>
+          <div class="card-tilt text-center mx-auto" style="max-width:500px;">Aplikasi Rekam Medis Rumah Sakit (Java (Swing), MySQL, JasperReports)</div><br>
+          <div class="card-tilt text-center mx-auto" style="max-width:500px;">pengembangan aplikasi Absensi menggunkana QR berbasis web (PHP (native) dengan library phpqrcode, MySQL)</div><br>
+           <div class="card-tilt text-center mx-auto" style="max-width:500px;">pengembangan aplikasi Perpustakaan dengan QR berbasis web ( PHP native, phpqrcode, MySQL)</div>
         </div>
         <div class="tab-pane fade" id="skill">
           <div class="row g-4 justify-content-center">
             <div class="col-6 col-md-4"><div class="card-tilt text-center">HTML & CSS</div></div>
             <div class="col-6 col-md-4"><div class="card-tilt text-center">JavaScript</div></div>
-            <div class="col-6 col-md-4"><div class="card-tilt text-center">React / Next.js</div></div>
+            <div class="col-6 col-md-4"><div class="card-tilt text-center">PHP</div></div>
           </div>
         </div>
         <div class="tab-pane fade" id="cert">
-          <div class="card-tilt text-center mx-auto" style="max-width:500px;">Dicoding – Front‑End Developer Expert</div>
+          <div class="card-tilt text-center mx-auto" style="max-width:500px;">Dicoding –  Meniti Karier sebagai Software Developer</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== Portfolio ===== -->
   <section id="projects" data-aos="fade-up">
     <div class="container">
       <h2 class="section-title">Projek Unggulan</h2>
       <div class="row gy-4">
-        <div class="col-md-6"><div class="project-card" data-tilt><h5>Website Toko Online</h5><p>E‑commerce modern (React + Firebase + Midtrans).</p></div></div>
-        <div class="col-md-6"><div class="project-card" data-tilt><h5>Dashboard Analytics</h5><p>Panel admin interaktif (Chart.js + RBAC).</p></div></div>
+        <div class="col-md-6"><div class="project-card" data-tilt><h5>Website Perpustakaan berbasis QRCode</h5><p>(html+css, php, javascript, phpqrcode).</p></div></div>
+        <div class="col-md-6"><div class="project-card" data-tilt><h5>website pemesanan aplikasi hotel</h5><p>Panel admin interaktif (html+css, php, javascript, phpqrcode).</p></div></div>
       </div>
     </div>
   </section>
 
-  <!-- ===== Contact ===== -->
-  <section id="contact" data-aos="fade-up">
-    <div class="container">
-      <h2 class="section-title">Kontak</h2>
+  <section id="contact" data-aos="fade-up" >
+    <div class="container" >
+      <h2 class="section-title" >Kontak</h2>
       <div class="contact-card mx-auto col-lg-8">
         <form>
-          <div class="row g-3">
+          <div class="row g-3" >
             <div class="col-md-6"><input type="text" class="form-control" placeholder="Nama" required></div>
             <div class="col-md-6"><input type="email" class="form-control" placeholder="Email" required></div>
             <div class="col-12"><textarea rows="4" class="form-control" placeholder="Pesan" required></textarea></div>
@@ -216,30 +210,24 @@
     </div>
   </section>
 
-  <!-- ===== Footer ===== -->
   <footer class="py-4 text-center" style="background:var(--bg-sec);">© 2025 Fahmi. All Rights Reserved.</footer>
 
-  <!-- ===== 3rd‑Party JS ===== -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
-  <!-- ===== Custom JS ===== -->
   <script>
     AOS.init({ once:true, duration:800 });
     VanillaTilt.init(document.querySelectorAll('[data-tilt]'), { max:15, speed:400, glare:true, "max-glare":0.2 });
 
-    // Typed subtitle
     new Typed('#typed', { strings:["Creative Web Developer","UI/UX Enthusiast","Tech Visionary"], typeSpeed:50, backSpeed:30, backDelay:2000, loop:true });
 
-    // Theme toggle
     const toggleBtn=document.getElementById('theme-toggle');
     const setTheme=(light)=>{ document.body.classList.toggle('light-mode', light); localStorage.setItem('theme', light?'light':'dark'); };
     setTheme(localStorage.getItem('theme')==='light');
     toggleBtn.addEventListener('click',()=>setTheme(!document.body.classList.contains('light-mode')));
 
-    // Active nav highlight on scroll
     const sections=document.querySelectorAll('section');
     const navLinks=document.querySelectorAll('.nav-link');
     window.addEventListener('scroll',()=>{
