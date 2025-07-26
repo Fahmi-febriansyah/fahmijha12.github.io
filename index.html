@@ -1,111 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-	<link rel="stylesheet" href="style1.css">
-	<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   <link rel="icon" href="assets/img/admin-ui.png">
-   <title>Portofolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fahmi | Portofolio</title>
+
+  <!-- ===== 3rd‑Party CSS ===== -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ---------- THEME VARIABLES ---------- */
+    :root {
+      --bg-main: #0d0125;
+      --bg-sec: #25004d;
+      --text-main: #f4e8ff;
+      --accent-1: #b56bff;
+      --accent-2: #8e44ad;
+      --shadow-card: rgba(133, 54, 255, 0.25);
+    }
+    body.light-mode {
+      --bg-main: #f6f5ff;
+      --bg-sec: #ffffff;
+      --text-main: #1a093d;
+      --accent-1: #8e44ad;
+      --accent-2: #be8dff;
+      --shadow-card: rgba(0,0,0,0.1);
+    }
+
+    /* ---------- BASE ---------- */
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-main);
+      color: var(--text-main);
+      font-family: 'Rubik', sans-serif;
+      transition: background .4s, color .4s;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; }
+
+    /* ---------- NAVBAR ---------- */
+    .navbar {
+      backdrop-filter: blur(6px);
+      background: rgba(0,0,0,0.2) !important;
+    }
+    .nav-link { color: var(--text-main) !important; margin-inline: .75rem; position:relative; }
+    .nav-link::after {
+      content:""; position:absolute; bottom:-6px; left:0; height:2px; width:0; background:var(--accent-1); transition:width .3s;
+    }
+    .nav-link:hover::after, .nav-link.active::after { width:100%; }
+
+    /* Theme Toggle */
+    #theme-toggle { border:2px solid var(--accent-1); background:transparent; color:var(--accent-1); border-radius:50px; padding:6px 12px; margin-left:1rem; }
+
+    /* ---------- BACKGROUND BLOBS ---------- */
+    .bg-anim { position:fixed; inset:0; z-index:-2; pointer-events:none; }
+    .blob { position:absolute; width:60vmax; aspect-ratio:1/1; background:radial-gradient(circle at 30% 30%, var(--accent-1), transparent 60%); filter:blur(120px); opacity:.6; animation:blob 25s ease-in-out infinite alternate; }
+    .blob:nth-child(2){ background:radial-gradient(circle at 70% 70%, var(--accent-2), transparent 60%); animation-delay:-12s; }
+    @keyframes blob{ from{transform:translate(-30%,-20%) rotate(0deg);} to{transform:translate(25%,25%) rotate(360deg);} }
+
+
+    /* ---------- HERO ---------- */
+    .hero{ min-height:100vh; display:flex; align-items:center; }
+    .hero .container{ display:flex; flex-wrap:wrap; gap:50px; align-items:center; justify-content:center; }
+    .profile-img{ width:260px; height:260px; border-radius:50%; object-fit:cover; border:6px solid var(--accent-1); box-shadow:0 0 35px var(--accent-1); }
+    h1.name{ font-family:'Orbitron',sans-serif; font-size:clamp(2.4rem,6vw+1rem,3.8rem); text-shadow:0 0 8px var(--accent-1); }
+    .typed-cursor{ color:var(--accent-2); }
+    .btn-accent{ background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); border:none; color:#fff; font-weight:600; padding:10px 26px; border-radius:10px; box-shadow:0 0 15px var(--accent-2); transition:transform .3s, box-shadow .3s; }
+    .btn-accent:hover{ transform:translateY(-3px) scale(1.04); box-shadow:0 0 25px var(--accent-1); }
+
+    /* ---------- SECTIONS ---------- */
+    section{ padding:110px 20px; position:relative; }
+    .section-title{ font-family:'Orbitron',sans-serif; font-size:2.3rem; text-align:center; color:var(--accent-1); margin-bottom:60px; text-shadow:0 0 8px var(--accent-1); }
+
+    /* About */
+    .about-box{ background:linear-gradient(135deg,var(--bg-sec) 10%,rgba(255,255,255,.06)); padding:50px; border-radius:22px; box-shadow:0 8px 30px var(--shadow-card); position:relative; overflow:hidden; }
+    .about-box::before{ content:""; position:absolute; inset:0; padding:2px; border-radius:22px; background:linear-gradient(135deg,var(--accent-1),transparent); mask:linear-gradient(#0000 0 0); }
+
+    /* Tilt Cards */
+    .card-tilt{ background:linear-gradient(145deg,var(--bg-sec),var(--bg-main)); border:none; border-radius:18px; padding:35px 25px; color:var(--text-main); box-shadow:0 6px 24px var(--shadow-card); transition:transform .4s; }
+    .card-tilt:hover{ transform:rotateX(8deg) rotateY(14deg) translateY(-8px); }
+    .icon-xl{ font-size:3rem; }
+
+    /* Portfolio */
+    .project-card{ background:linear-gradient(120deg,var(--bg-sec),rgba(255,255,255,.03)); border-radius:18px; box-shadow:0 6px 24px var(--shadow-card); padding:30px; transition:transform .35s; }
+    .project-card:hover{ transform:translateY(-12px) scale(1.03); }
+
+    /* Contact */
+    .contact-card{ background:var(--bg-sec); padding:45px; border-radius:22px; box-shadow:0 6px 24px var(--shadow-card); }
+    .form-control,.form-control:focus{ background:rgba(255,255,255,.08); border:none; color:var(--text-main); }
+    .form-control::placeholder{ color:rgba(255,255,255,.6); }
+
+    /* Tab Pills */
+    .nav-pills .nav-link{ border-radius:0; color:var(--text-main); padding-inline:30px; }
+    .nav-pills .nav-link.active{ background:var(--accent-1); color:#fff; box-shadow:0 0 12px var(--accent-2); }
+  </style>
 </head>
 <body>
- <nav class="navbar navbar-expand-lg navbar-dark" style="  background-color: hsl(231deg 16% 24%)">
-   <a class="navbar-brand" href="#"> 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-     </button>
-  </a>
+  <!-- Background Blobs -->
+  <div class="bg-anim"><span class="blob"></span><span class="blob"></span></div>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-     <ul class="navbar-nav mr-auto">
-       <li class="nav-item active">
-         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-         <a class="nav-link" href="#skil">Skill</a>
-      </li>
-      <li class="nav-item">
-         <a class="nav-link"href="#social">Social Media</a>
-      </li>
-   </ul>
-   <a href="mailto:fahmijha12@gmail.com"><button type="button" class="btn btn-primary">CONTACT ME</button></a>
-</div>
-</nav>
-<main>
- <div class="kelas">
-   <div class="container">
-     <br>
-     <div class="row">
-       <div class="col-sm-6"><div class="ampa"><center><h1>Fahmoy32</h1>
-         <h6>Junior Programmer</h6>
-         <hr>
-         <br>
-         <h1>I am a <br> <span id="typed" class="typed"></span></h1>
-      </center></div></div>
-      <div class="col-sm-6">
-         <center><img src="assets/img/aku.png" alt=""></center>
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#home">Fahmi</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navBar">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Project</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <button id="theme-toggle">🌓</button>
       </div>
-   </div>
-</div>
-<div style=" background-color: #2c2f3d; color: white; " id="skil">
-  <hr>
-  <center>
-    <h1>SKILL</h1>
- </center>
- <br><br>
- <div class="container">
-    <div class="row">
-      <div class="col-sm-3">
-        <center>
-          <img src="assets/img/html.png" style=" width:6rem; " alt="">
-          <h5>HTML</h5></center>
-       </div>
-       <div class="col-sm-3">
-          <center>
-            <img src="assets/img/css.png" style=" width:6rem; " alt="">
-            <h5>CSS</h5></center>
-         </div>
-         <div class="col-sm-3">
-            <center>
-              <img src="assets/img/javascript.png" style=" width:6rem; " alt="">
-              <h5>JAVASCRIPT</h5></center>
-           </div>
-           <div class="col-sm-3">
-              <center>
-                <img src="assets/img/php.png" style=" width:7rem; " alt="">
-                <h5>PHP</h5></center>
-             </div>
-          </div>
-       </div>
     </div>
- </div>
-</div>
-</div>
-<br><br>
-<div class="container" id="social">
-   <div class="d-flex flex-column align-items-center">
-      <h3 class="mb-4" style=" color: white; " >Follow Me</h3>
-      <ul>
-       <li><a href="facebook/fahmijha12.com" target="blank"><span class="social-icon social-facebook"><i class="fa fa-facebook"></i></span></a></li>
-       <li><a href="fahmijha12@gmail.com" target="blank"><span class="social-icon social-google"><i class="fa fa-google"></i></span></a></li>
-       <li><a href="https://www.instagram.com/fahmoy32/" target="blank"><span class="social-icon social-instagram"><i class="fa fa-instagram"></i></span></a></li>
-       <li><a href="https://github.com/Fahmi-febriansyah"><span class="social-icon social-github"><i class="fa fa-github"></i></span></a></li>
-    </ul>
- </div>
-</div>
-</main>
-<!-- js -->
-<script>
-  new Typed('#typed',{
-    strings : ['desainer','backend dev','motivator',"mentor"],
-    typeSpeed : 100,
-    delaySpeed : 100,
-    loop : true
- });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+  </nav>
+
+  <!-- ===== Hero ===== -->
+  <header class="hero" id="home">
+    <div class="container" data-aos="fade-up">
+      <img src="asset/img/aku.png" alt="Foto Fahmi" class="profile-img" style=" width: 140px; ">   
+      <div class="text-center text-lg-start">
+        <h1 class="name mb-2">Fahmi Febriansyah</h1>
+        <h4><span id="typed"></span></h4>
+        <a href="#about" class="btn-accent mt-4">Explore More</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Marquee ===== -->
+  <div class="py-3 text-center" style="background:var(--bg-sec); font-family:'Orbitron',sans-serif; white-space:nowrap; overflow:hidden;">
+    <div class="d-inline-block" style="animation:marquee 20s linear infinite; font-size:1.8rem;">
+      ✳ LET&nbsp;ME&nbsp;INTRODUCE&nbsp;MYSELF ✳ LET&nbsp;ME&nbsp;INTRODUCE&nbsp;MYSELF ✳
+    </div>
+  </div>
+  <style>@keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}</style>
+
+  <!-- ===== About ===== -->
+  <section id="about" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title">Tentang Saya</h2>
+      <div class="about-box mx-auto col-lg-9">
+        <p>Saya <strong>Fahmi</strong>, pengembang web fokus pada estetika futuristik dan performa optimal. 4+ tahun membangun aplikasi e‑commerce, dashboard, dan landing interaktif.</p>
+        <ul class="list-inline mt-4">
+          <li class="list-inline-item me-4"><i class="fab fa-github fa-lg"></i></li>
+          <li class="list-inline-item me-4"><i class="fab fa-linkedin fa-lg"></i></li>
+          <li class="list-inline-item"><i class="fab fa-instagram fa-lg"></i></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Skills / Tabs ===== -->
+  <section id="skills" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title">Journey</h2>
+      <ul class="nav nav-pills justify-content-center mb-5" id="journeyTab" role="tablist">
+        <li class="nav-item" role="presentation"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#edu">Education</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#exp">Experience</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#skill">Skills</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#cert">Certificate</button></li>
+      </ul>
+      <div class="tab-content" id="journeyTabContent">
+        <div class="tab-pane fade show active" id="edu">
+          <div class="card-tilt text-center mx-auto" style="max-width:500px;">Universitas Indraprasta – S.Kom (2020‑2024)</div>
+        </div>
+        <div class="tab-pane fade" id="exp">
+          <div class="card-tilt text-center mx-auto" style="max-width:500px;">Frontend Developer – Left Wing Studio (2023‑Sekarang)</div>
+        </div>
+        <div class="tab-pane fade" id="skill">
+          <div class="row g-4 justify-content-center">
+            <div class="col-6 col-md-4"><div class="card-tilt text-center">HTML & CSS</div></div>
+            <div class="col-6 col-md-4"><div class="card-tilt text-center">JavaScript</div></div>
+            <div class="col-6 col-md-4"><div class="card-tilt text-center">React / Next.js</div></div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cert">
+          <div class="card-tilt text-center mx-auto" style="max-width:500px;">Dicoding – Front‑End Developer Expert</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Portfolio ===== -->
+  <section id="projects" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title">Projek Unggulan</h2>
+      <div class="row gy-4">
+        <div class="col-md-6"><div class="project-card" data-tilt><h5>Website Toko Online</h5><p>E‑commerce modern (React + Firebase + Midtrans).</p></div></div>
+        <div class="col-md-6"><div class="project-card" data-tilt><h5>Dashboard Analytics</h5><p>Panel admin interaktif (Chart.js + RBAC).</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section id="contact" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title">Kontak</h2>
+      <div class="contact-card mx-auto col-lg-8">
+        <form>
+          <div class="row g-3">
+            <div class="col-md-6"><input type="text" class="form-control" placeholder="Nama" required></div>
+            <div class="col-md-6"><input type="email" class="form-control" placeholder="Email" required></div>
+            <div class="col-12"><textarea rows="4" class="form-control" placeholder="Pesan" required></textarea></div>
+          </div>
+          <button class="btn-accent w-100 mt-4">Kirim Pesan <i class="fas fa-paper-plane ms-2"></i></button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="py-4 text-center" style="background:var(--bg-sec);">© 2025 Fahmi. All Rights Reserved.</footer>
+
+  <!-- ===== 3rd‑Party JS ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <!-- ===== Custom JS ===== -->
+  <script>
+    AOS.init({ once:true, duration:800 });
+    VanillaTilt.init(document.querySelectorAll('[data-tilt]'), { max:15, speed:400, glare:true, "max-glare":0.2 });
+
+    // Typed subtitle
+    new Typed('#typed', { strings:["Creative Web Developer","UI/UX Enthusiast","Tech Visionary"], typeSpeed:50, backSpeed:30, backDelay:2000, loop:true });
+
+    // Theme toggle
+    const toggleBtn=document.getElementById('theme-toggle');
+    const setTheme=(light)=>{ document.body.classList.toggle('light-mode', light); localStorage.setItem('theme', light?'light':'dark'); };
+    setTheme(localStorage.getItem('theme')==='light');
+    toggleBtn.addEventListener('click',()=>setTheme(!document.body.classList.contains('light-mode')));
+
+    // Active nav highlight on scroll
+    const sections=document.querySelectorAll('section');
+    const navLinks=document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll',()=>{
+      let current='home';
+      sections.forEach(sec=>{ const top=window.scrollY; if(top>=sec.offsetTop-80){ current=sec.getAttribute('id'); }});
+      navLinks.forEach(l=>{ l.classList.toggle('active', l.getAttribute('href')==='#'+current ); });
+    });
+  </script>
 </body>
 </html>
